@@ -7,6 +7,7 @@ from uuid import uuid4
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.decorators.csrf import  csrf_exempt
+from django.utils.encoding import force_unicode
 
 from models import AccessLog
 
@@ -43,8 +44,10 @@ def proxy_tunnel(request, *args, **kwargs):
 		connector = httplib.HTTPConnection
 
 	connection = connector(settings.TARGET_HOST, settings.TARGET_PORT)
-	
-	connection.request(request.method, path, body=request_body, headers=request.META)
+
+	# TODO gormezden gelmek cozum degil ama belki sorun da yoktur
+	headers = {k:(lambda v: v.decode("utf-8", "ignore") if type(v)==str else v )(val) for k,val in request.META.items()}
+	connection.request(request.method, path, body=request_body, headers=headers)
 
 	target_resp = connection.getresponse()
 
