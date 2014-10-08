@@ -42,8 +42,8 @@ def proxy_tunnel(request, *args, **kwargs):
 		connector = httplib.HTTPConnection
 
 	connection = connector(settings.TARGET_HOST, settings.TARGET_PORT)
-	# TODO headers
-	connection.request(request.method, path, body=request_body)
+	
+	connection.request(request.method, path, body=request_body, headers=request.META)
 
 	target_resp = connection.getresponse()
 
