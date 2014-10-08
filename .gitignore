@@ -1,0 +1,9 @@
+# Statik kod dosyalari
+*.log
+*.pot
+*.pyc
+*.zip
+
+
+# veritabani
+*.sqlite3
