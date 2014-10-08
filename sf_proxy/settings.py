@@ -16,6 +16,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TARGET_HOST = "merkeztest.efatura.gov.tr"
 TARGET_PORT = 443
 
+LOG_DIR = "D:\\GIB_LOG"
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
