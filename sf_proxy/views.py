@@ -35,6 +35,7 @@ def save_to_file(data):
 def proxy_tunnel(request, *args, **kwargs):
 	path = request.get_full_path()
 	request_body = request.body
+	save_to_file(request_body)
 
 	if settings.TARGET_PORT == 443:
 		connector = httplib.HTTPSConnection
@@ -58,7 +59,6 @@ def proxy_tunnel(request, *args, **kwargs):
 	response.write(resp_body)
 
 	save_access(request_meta=str(request.META), response=resp_body, ip=request.get_host())
-	save_to_file(request_body)
 	
 	return response
 
